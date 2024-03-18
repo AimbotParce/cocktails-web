@@ -1,6 +1,7 @@
 "use client"
 import get_cocktails from "@/api/cocktails/get"
 import Cocktail from "@/api/models/cocktail"
+import CocktailCard from "@/components/CocktailCard"
 import { useEffect, useState } from "react"
 
 export default function Home() {
@@ -13,9 +14,7 @@ export default function Home() {
     return (
         <main className="flex min-h-screen flex-col items-center justify-between p-24">
             {cocktails.map((cocktail) => (
-                <div key={cocktail.id} className="flex flex-col items-center">
-                    <h2 className="text-2xl font-bold text-white">{cocktail.name}</h2>
-                </div>
+                <CocktailCard key={cocktail.uuid} {...cocktail} />
             ))}
         </main>
     )
