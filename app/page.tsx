@@ -9,24 +9,6 @@ export default async function Home() {
             {cocktails.map((cocktail) => (
                 <CocktailCard key={cocktail.uuid} {...cocktail} />
             ))}
-            {cocktails.map((cocktail) => (
-                <CocktailCard key={cocktail.uuid} {...cocktail} />
-            ))}
-            {cocktails.map((cocktail) => (
-                <CocktailCard key={cocktail.uuid} {...cocktail} />
-            ))}
-            {cocktails.map((cocktail) => (
-                <CocktailCard key={cocktail.uuid} {...cocktail} />
-            ))}
-            {cocktails.map((cocktail) => (
-                <CocktailCard key={cocktail.uuid} {...cocktail} />
-            ))}
-            {cocktails.map((cocktail) => (
-                <CocktailCard key={cocktail.uuid} {...cocktail} />
-            ))}
-            {cocktails.map((cocktail) => (
-                <CocktailCard key={cocktail.uuid} {...cocktail} />
-            ))}
         </main>
     )
 }
