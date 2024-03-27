@@ -1,7 +1,5 @@
-"use client"
 const API_TOKEN: string = process.env.NEXT_PUBLIC_API_TOKEN ?? ""
 const API_HOST: string = process.env.NEXT_PUBLIC_API_URL ?? ""
-
 
 const api_endpoint = (endpoint: string) => {
     const wrapper = (method: string) => {
@@ -39,7 +37,13 @@ const api_endpoint = (endpoint: string) => {
         }
         return caller
     }
-    return { GET: wrapper("GET"), POST: wrapper("POST"), PUT: wrapper("PUT"), DELETE: wrapper("DELETE"), PATCH: wrapper("PATCH")}
+    return {
+        GET: wrapper("GET"),
+        POST: wrapper("POST"),
+        PUT: wrapper("PUT"),
+        DELETE: wrapper("DELETE"),
+        PATCH: wrapper("PATCH"),
+    }
 }
 
 export default api_endpoint
