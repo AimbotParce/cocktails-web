@@ -4,10 +4,8 @@ export default interface Cocktail {
     id: number
     uuid: string
     name: string
-    instructions: string|null
+    instructions: string | null
     ingredients: Ingredient[]
-    image_uuid: string
+    image_uuid: string | null
     creation_datetime: string
 }
-
-

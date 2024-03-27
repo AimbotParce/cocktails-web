@@ -1,19 +1,21 @@
 import Cocktail from "@/api/models/cocktail"
+import { motion } from "framer-motion"
 import Image from "next/image"
 
 const CocktailCard = ({ id, uuid, name, instructions, ingredients, image_uuid, creation_datetime }: Cocktail) => {
+    const src = image_uuid ? `${process.env.NEXT_PUBLIC_API_URL}/${image_uuid}` : "/cocktail_not_found.jpg"
     return (
-        <div>
-            <h1>{name}</h1>
-            <p>{instructions}</p>
-            <ul>
-                {ingredients.map((ingredient) => (
-                    <li key={ingredient.uuid}>{ingredient.name}</li>
-                ))}
-            </ul>
-            <Image src={`${process.env.NEXT_PUBLIC_API_URL}/${image_uuid}`} alt={name} width={30} />
-            <p>{creation_datetime}</p>
-        </div>
+        <motion.div className="flex gap-4 p-2 bg-white items-center cursor-pointer" whileHover={{ scale: 1.05 }}>
+            <Image src={src} alt={name} width={100} height={100} />
+            <div>
+                <h1>{name}</h1>
+                <ul>
+                    {ingredients.map((ingredient) => (
+                        <li key={ingredient.uuid}>{ingredient.name}</li>
+                    ))}
+                </ul>
+            </div>
+        </motion.div>
     )
 }
 
