@@ -33,7 +33,7 @@ jobs:
 
       - name: Connect and deploy
         run: |
-          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "systemctl restart cocktails-web.service"
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "sudo systemctl restart cocktails-web.service"
 
       - name: Cleanup
         run: |
