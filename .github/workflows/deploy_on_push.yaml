@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  Test Build:
+  Test-Build:
     uses: AimbotParce/cocktails-web/.github/workflows/build_test.yaml@main
     with:
       node-version: '20.x'
