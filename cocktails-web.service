@@ -4,7 +4,7 @@ After=network.target
 
 [Service]
 User=root
-WorkingDirectory=/home/cocktails/cocktails-web
+WorkingDirectory=/var/www/cocktails-web
 ExecStartPre=git pull
 ExecStartPre=sh ./build.sh
 ExecStart=sh ./start.sh
