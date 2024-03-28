@@ -26,6 +26,10 @@ main {
   min-width: 48rem;
 }
 
+input[type="text"]:focus {
+  outline: none;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
