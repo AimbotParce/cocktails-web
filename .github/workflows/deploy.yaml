@@ -3,9 +3,6 @@ name: Deploy
 on:
   workflow_call:
     secrets:
-      MAIN_BRANCH:
-        description: 'Main branch'
-        required: true
       SSH_HOST:
         description: 'SSH host'
         required: true
@@ -15,13 +12,10 @@ on:
       SSH_USER:
         description: 'SSH user'
         required: true
-      WORK_DIR:
-        description: 'Working directory'
-        required: true
 
 
 jobs:
-  Build:
+  Deploy:
     runs-on: ubuntu-latest
 
     steps:
