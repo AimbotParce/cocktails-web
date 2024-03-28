@@ -6,8 +6,8 @@ After=network.target
 User=root
 WorkingDirectory=/var/www/cocktails-web
 ExecStartPre=git pull
-ExecStartPre=sh ./build.sh
-ExecStart=sh ./start.sh
+ExecStartPre=/bin/bash ./build.sh
+ExecStart=/bin/bash ./start.sh
 Restart=always
 RestartSec=3
 Environment=NODE_ENV=production
