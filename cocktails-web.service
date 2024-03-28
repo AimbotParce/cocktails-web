@@ -3,7 +3,7 @@ Description=Cocktails Web
 After=network.target
 
 [Service]
-User=cocktails
+User=root
 WorkingDirectory=/home/cocktails/cocktails-web
 ExecStartPre=git pull
 ExecStartPre=sh ./build.sh
