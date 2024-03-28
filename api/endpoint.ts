@@ -1,5 +1,5 @@
-const API_TOKEN: string = process.env.API_TOKEN ?? ""
-const API_HOST: string = process.env.API_URL ?? ""
+const API_TOKEN: string = process.env.NEXT_PUBLIC_API_TOKEN ?? ""
+const API_HOST: string = process.env.NEXT_PUBLIC_API_URL ?? ""
 
 const api_endpoint = (endpoint: string) => {
     const wrapper = (method: string) => {
