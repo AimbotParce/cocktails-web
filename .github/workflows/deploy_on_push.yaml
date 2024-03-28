@@ -14,8 +14,7 @@ jobs:
   Deploy:
     needs: Test-Build
     uses: AimbotParce/cocktails-web/.github/workflows/deploy.yaml@main
-    with:
-      secrets: inherit
+    secrets: inherit
 
 
         
