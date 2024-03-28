@@ -5,6 +5,7 @@ on:
     inputs:
       node-version:
         description: 'Node.js version'
+        type: string
         required: false
         default: '20.x'
 
