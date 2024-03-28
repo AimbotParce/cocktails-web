@@ -1,0 +1,16 @@
+[Unit]
+Description=Cocktails Web
+After=network.target
+
+[Service]
+User=cocktails
+WorkingDirectory=/home/cocktails/cocktails-web
+ExecStartPre=git pull
+ExecStartPre=./build.sh
+ExecStart=./start.sh
+Restart=always
+RestartSec=3
+Environment=NODE_ENV=production
+
+[Install]
+WantedBy=multi-user.target
