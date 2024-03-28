@@ -2,16 +2,20 @@
 import get_cocktail from "@/api/cocktails/uuid/get"
 import Cocktail from "@/api/models/cocktail"
 import { notFound } from "next/navigation"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 export default function Page({ params }: { params: { uuid: string } }) {
-    const [cocktail, setCocktail] = useState<Cocktail>()
+    const [cocktail, setCocktail] = useState<Cocktail | null>()
+    useEffect(() => {
+        get_cocktail(params.uuid)
+            .then(setCocktail)
+            .catch((e) => {
+                setCocktail(null)
+                console.error(e)
+            })
+    }, [params.uuid])
 
-    try {
-        get_cocktail(params.uuid).then(setCocktail)
-    } catch (e) {
-        return notFound()
-    }
+    if (cocktail === null) return notFound()
     if (!cocktail) return <h1>Loading...</h1>
 
     return (
