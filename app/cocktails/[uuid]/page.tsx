@@ -61,6 +61,12 @@ export default function Page({ params }: { params: { uuid: string } }) {
                         </ul>
                     </>
                 )}
+                {cocktail.instructions && (
+                    <>
+                        <h2 className="text-lg font-bold">Instructions:</h2>
+                        <p>{cocktail.instructions}</p>
+                    </>
+                )}
             </main>
         )
     }

@@ -19,9 +19,9 @@ export default function Home() {
                 <button className="bg-white p-2">
                     <Search />
                 </button>
-                <button className="bg-[var(--turquoise)] text-white p-2">
+                <a className="bg-[var(--turquoise)] text-white p-2" href="/cocktails/new">
                     <Add />
-                </button>
+                </a>
             </section>
             <ol className="flex flex-col gap-4">
                 {cocktails.map((cocktail) => (
