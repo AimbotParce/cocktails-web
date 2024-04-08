@@ -12,8 +12,8 @@ const CocktailCard = ({ id, uuid, name, instructions, ingredients, image, creati
         >
             <img src={src} alt={name} width={100} height={100} />
             <div>
-                <h1>{name}</h1>
-                <ul>
+                <h1 className="font-bold">{name}</h1>
+                <ul className="text-gray-500">
                     {ingredients.map((ingredient) => (
                         <li key={ingredient.id}>{ingredient.name}</li>
                     ))}
