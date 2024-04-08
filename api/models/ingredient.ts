@@ -1,7 +1,11 @@
+import Image from "./image"
+import IngredientAttribute from "./ingredient_attribute"
+
 export default interface Ingredient {
     id: number
-    uuid: string
     name: string
     description: string
-    image: string
+    image: Image
+    creation_datetime: string
+    attributes: IngredientAttribute[]
 }

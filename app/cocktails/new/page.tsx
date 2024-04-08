@@ -1,6 +1,7 @@
 "use client"
 import post_cocktail from "@/api/cocktails/post"
 import Cocktail from "@/api/models/cocktail"
+import IngredientPicker from "@/components/IngredientPicker"
 import { Done } from "@mui/icons-material"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
@@ -29,7 +30,11 @@ export default function Page({ params }: { params: { uuid: string } }) {
                     onChange={(e) => setCocktail({ ...cocktail, instructions: e.target.value })}
                 />
                 <label>Ingredients:</label>
-                <input type="text" className="bg-white p-4" />
+                <IngredientPicker
+                    className="bg-white p-4"
+                    current={cocktail.ingredients}
+                    setCurrent={(ings) => setCocktail({ ...cocktail, ingredients: ings })}
+                />
                 <label>Image:</label>
                 <input type="file" className="bg-white p-4" />
             </form>
