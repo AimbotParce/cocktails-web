@@ -1,7 +1,6 @@
 "use client"
 import get_ingredient_attributes from "@/api/ingredient_attributes/get"
 import IngredientAttribute from "@/api/models/ingredient_attribute"
-import IngredientAttributeTag from "@/components/IngredientAttributeTag"
 import { Add, Search } from "@mui/icons-material"
 import { useEffect, useState } from "react"
 
@@ -23,13 +22,16 @@ export default function Home() {
                     <Add />
                 </a>
             </section>
-            <ol className="flex flex-col gap-4">
-                {attributes.map((attribute) => (
-                    <IngredientAttributeTag
+            <ol className="flex flex-col gap-2">
+                {attributes.map((attribute, j) => (
+                    <a
                         key={attribute.id}
-                        {...attribute}
+                        className="cursor-pointer w-full hover:bg-gray-50 bg-white p-2"
                         href={`/ingredient_attributes/${attribute.name}`}
-                    />
+                    >
+                        <h2 className="font-bold text-sm">{attribute.name}</h2>
+                        <p className="text-xs">{attribute.description}</p>
+                    </a>
                 ))}
             </ol>
         </main>

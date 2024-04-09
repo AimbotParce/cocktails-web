@@ -1,7 +1,6 @@
 "use client"
 import get_ingredients from "@/api/ingredients/get"
 import Ingredient from "@/api/models/ingredient"
-import IngredientTag from "@/components/IngredientTag"
 import { Add, Search } from "@mui/icons-material"
 import { useEffect, useState } from "react"
 
@@ -23,9 +22,23 @@ export default function Home() {
                     <Add />
                 </a>
             </section>
-            <ol className="flex flex-col gap-4">
-                {ingredients.map((ingredient) => (
-                    <IngredientTag key={ingredient.id} {...ingredient} href={`/ingredients/${ingredient.name}`} />
+            <ol className="flex flex-col gap-2">
+                {ingredients.map((ingredient, j) => (
+                    <a
+                        key={ingredient.id}
+                        className="cursor-pointer flex w-full items-center gap-2 hover:bg-gray-50 bg-white p-2"
+                        href={`/ingredients/${ingredient.name}`}
+                    >
+                        <img
+                            src={`${process.env.NEXT_PUBLIC_API_URL}/attachments/images/${ingredient.image.uuid}`}
+                            alt={ingredient.name}
+                            className="object-cover h-8 w-8 rounded-full border"
+                        />
+                        <div>
+                            <h2 className="font-bold text-sm">{ingredient.name}</h2>
+                            <p className="text-xs">{ingredient.description}</p>
+                        </div>
+                    </a>
                 ))}
             </ol>
         </main>

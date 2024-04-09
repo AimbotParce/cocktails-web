@@ -13,7 +13,7 @@ class IngredientTag extends React.Component<IngredientTagProps> {
         const src = `${process.env.NEXT_PUBLIC_API_URL}/attachments/images/${this.props.image.uuid}`
         return (
             <a
-                className={`border rounded-full pr-2 gap-2 flex items-center w-fit p-[1px] ${this.props.className} font-bold text-sm hover:bg-gray-50`}
+                className={`border bg-white rounded-full pr-2 gap-2 flex items-center w-fit p-[1px] ${this.props.className} font-bold text-sm hover:bg-gray-50`}
                 onClick={this.props.onClick}
                 href={this.props.href}
             >
