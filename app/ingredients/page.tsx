@@ -25,7 +25,7 @@ export default function Home() {
             </section>
             <ol className="flex flex-col gap-4">
                 {ingredients.map((ingredient) => (
-                    <IngredientTag key={ingredient.id} {...ingredient} />
+                    <IngredientTag key={ingredient.id} {...ingredient} href={`/ingredients/${ingredient.name}`} />
                 ))}
             </ol>
         </main>

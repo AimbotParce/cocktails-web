@@ -19,6 +19,12 @@ export default function Page({ params }: { params: { uuid: string } }) {
                     className="bg-white px-3 py-2 w-full"
                     onChange={(e) => setIngredient({ ...ingredient, name: e.target.value })}
                 />
+                <label>Description:</label>
+                <input
+                    type="text"
+                    className="bg-white px-3 py-2 w-full"
+                    onChange={(e) => setIngredient({ ...ingredient, description: e.target.value })}
+                />
                 <label>Attributes:</label>
                 <IngredientAttributePicker
                     className="bg-white px-3 py-2 w-full"
