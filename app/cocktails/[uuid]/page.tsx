@@ -1,6 +1,7 @@
 "use client"
 import get_cocktail from "@/api/cocktails/uuid/get"
 import Cocktail from "@/api/models/cocktail"
+import IngredientTag from "@/components/IngredientTag"
 import { Edit } from "@mui/icons-material"
 import { Abril_Fatface } from "next/font/google"
 import { notFound, useRouter } from "next/navigation"
@@ -38,9 +39,9 @@ export default function Page({ params }: { params: { uuid: string } }) {
             {cocktail.ingredients.length > 0 && (
                 <>
                     <h2 className="text-lg font-bold">Ingredients:</h2>
-                    <ul>
+                    <ul className="flex flex-col gap-2">
                         {cocktail.ingredients.map((ingredient) => (
-                            <li key={ingredient.id}>{ingredient.name}</li>
+                            <IngredientTag key={ingredient.id} {...ingredient} />
                         ))}
                     </ul>
                 </>
