@@ -3,16 +3,44 @@ const API_HOST: string = process.env.NEXT_PUBLIC_API_URL ?? ""
 
 const api_endpoint = (endpoint: string) => {
     const wrapper = (method: string) => {
-        const caller = async ({ json, headers }: { json?: object; headers?: object } = {}) => {
-            const res = await fetch(`${API_HOST}/${endpoint}`, {
-                method,
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": API_TOKEN,
-                    ...headers,
-                },
-                body: JSON.stringify(json),
-            })
+        const caller = async ({ json, headers, files }: { json?: object; headers?: object; files?: File[] } = {}) => {
+            if (files && json) {
+                throw new Error("You can't send both files and json in the same request")
+            }
+            var res = undefined
+            if (files) {
+                const formData = new FormData()
+                files.forEach((file) => {
+                    formData.append("file", file)
+                })
+                res = await fetch(`${API_HOST}/${endpoint}`, {
+                    method,
+                    headers: {
+                        "Authorization": API_TOKEN,
+                        ...headers,
+                    },
+                    body: formData,
+                })
+            } else if (json) {
+                res = await fetch(`${API_HOST}/${endpoint}`, {
+                    method,
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": API_TOKEN,
+                        ...headers,
+                    },
+                    body: JSON.stringify(json),
+                })
+            } else {
+                res = await fetch(`${API_HOST}/${endpoint}`, {
+                    method,
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": API_TOKEN,
+                        ...headers,
+                    },
+                })
+            }
             // Check if there was an error
             let err = undefined
             const error_code = res.status

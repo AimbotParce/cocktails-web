@@ -1,4 +1,5 @@
 "use client"
+import post_image from "@/api/attachments/images/post"
 import post_cocktail from "@/api/cocktails/post"
 import Cocktail from "@/api/models/cocktail"
 import IngredientPicker from "@/components/IngredientPicker"
@@ -8,7 +9,15 @@ import { useState } from "react"
 
 export default function Page() {
     const [cocktail, setCocktail] = useState<Cocktail>({} as Cocktail)
+    const [image, setImage] = useState<File | null>(null)
     const router = useRouter()
+
+    const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0]
+        if (!file) return
+        // Store the image in the state
+        setImage(file)
+    }
 
     return (
         <main className="flex items-end w-full gap-4">
@@ -32,11 +41,14 @@ export default function Page() {
                     setCurrent={(ings) => setCocktail({ ...cocktail, ingredients: ings })}
                 />
                 <label>Image:</label>
-                <input type="file" className="bg-white px-3 py-2" />
+                <input type="file" accept="image/*" className="bg-white px-3 py-2" onChange={handleImageUpload} />
             </form>
             <button
                 className="bg-[var(--turquoise)] text-white p-2"
-                onClick={() => {
+                onClick={async () => {
+                    if (image) {
+                        cocktail.image = await post_image(image)
+                    }
                     post_cocktail(cocktail).then((c) => router.push(`/cocktails/${c.uuid}`))
                 }}
             >
