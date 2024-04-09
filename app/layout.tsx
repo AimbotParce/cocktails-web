@@ -20,7 +20,7 @@ export default function RootLayout({
             <body className={sans.className}>
                 <p>Welcome to cocktail.parcerisa.com</p>
                 <NavBar />
-                <section>{children}</section>
+                <section className="max-w-3xl">{children}</section>
             </body>
         </html>
     )
