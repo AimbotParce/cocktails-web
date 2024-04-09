@@ -6,7 +6,7 @@ import { Done } from "@mui/icons-material"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 
-export default function Page({ params }: { params: { uuid: string } }) {
+export default function Page() {
     const [cocktail, setCocktail] = useState<Cocktail>({} as Cocktail)
     const router = useRouter()
 
