@@ -1,27 +1,27 @@
-import get_ingredients from "@/api/ingredients/get"
-import Ingredient from "@/api/models/ingredient"
+import get_ingredient_attributes from "@/api/ingredient_attributes/get"
+import IngredientAttribute from "@/api/models/ingredient_attribute"
 import { Close } from "@mui/icons-material"
 import React from "react"
-import IngredientTag from "../IngredientTag"
+import IngredientAttributeTag from "../IngredientAttributeTag"
 
-interface IngredientPickerProps {
-    current: Ingredient[]
-    setCurrent: (i: Ingredient[]) => void
+interface IngredientAttributePickerProps {
+    current: IngredientAttribute[]
+    setCurrent: (i: IngredientAttribute[]) => void
     className?: string
 }
 
-class IngredientPicker extends React.Component<IngredientPickerProps> {
+class IngredientAttributePicker extends React.Component<IngredientAttributePickerProps> {
     // On instancing it, fetch the available ingredients from the API
     // and set them to the state
     state = {
-        available: [] as Ingredient[],
+        available: [] as IngredientAttribute[],
         value: "",
-        filtered: [] as Ingredient[],
+        filtered: [] as IngredientAttribute[],
         selected: -1,
     }
     // When the component mounts, fetch the ingredients
     componentDidMount() {
-        get_ingredients().then((ings) => this.setState({ available: ings }))
+        get_ingredient_attributes().then((atts) => this.setState({ available: atts }))
     }
 
     handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,16 +31,17 @@ class IngredientPicker extends React.Component<IngredientPickerProps> {
             this.setState({ filtered: [], selected: -1 })
             return
         }
+
         this.setState({
-            filtered: this.state.available.filter((i) => i.name.toLowerCase().includes(value.toLowerCase())),
+            filtered: this.state.available.filter((a) => a.name.toLowerCase().includes(value.toLowerCase())),
             selected: 0,
         })
     }
 
     handleSelect = (name: string) => () => {
-        const ingredient = this.state.available.find((i) => i.name === name)
-        if (!ingredient) return
-        this.props.setCurrent([...this.props.current, ingredient])
+        const attribute = this.state.available.find((i) => i.name === name)
+        if (!attribute) return
+        this.props.setCurrent([...this.props.current, attribute])
         this.setState({
             available: this.state.available.filter((i) => i.name !== name),
             value: "",
@@ -76,45 +77,38 @@ class IngredientPicker extends React.Component<IngredientPickerProps> {
         return (
             <div className="w-full">
                 <div className={`${this.props.className} flex flex-wrap w-full gap-1`}>
-                    {this.props.current.map((ingredient, j) => (
-                        <IngredientTag
+                    {this.props.current.map((attribute, j) => (
+                        <IngredientAttributeTag
                             key={j}
-                            {...ingredient}
+                            {...attribute}
                             onClick={this.handleRemove(j)}
                             className="cursor-pointer"
                         >
                             <Close sx={{ fontSize: 15 }} />
-                        </IngredientTag>
+                        </IngredientAttributeTag>
                     ))}
                     <input
                         className={`min-w-[${this.state.value.length * 2 || 1}rem] grow`}
                         type="text"
                         onChange={this.handleInputChange}
                         value={this.state.value}
-                        placeholder="Start typing to add ingredients..."
+                        placeholder="Start typing to add attributes..."
                         onKeyDown={this.handleKeyDown}
                     />
                 </div>
                 <div className="relative">
                     {this.state.filtered.length > 0 && (
                         <ul className={`absolute top-0 w-full bg-white py-2 shadow-xl`}>
-                            {this.state.filtered.map((ingredient, j) => (
+                            {this.state.filtered.map((attribute, j) => (
                                 <li
-                                    key={ingredient.id}
-                                    className={`cursor-pointer flex w-full items-center gap-2 ${
+                                    key={attribute.id}
+                                    className={`cursor-pointer w-full${
                                         j == this.state.selected ? "bg-gray-100" : "hover:bg-gray-50"
                                     } p-2`}
-                                    onClick={this.handleSelect(ingredient.name)}
+                                    onClick={this.handleSelect(attribute.name)}
                                 >
-                                    <img
-                                        src={`${process.env.NEXT_PUBLIC_API_URL}/attachments/images/${ingredient.image.uuid}`}
-                                        alt={ingredient.name}
-                                        className="object-cover h-8 w-8 rounded-full border"
-                                    />
-                                    <div>
-                                        <h2 className="font-bold text-sm">{ingredient.name}</h2>
-                                        <p className="text-xs">{ingredient.description}</p>
-                                    </div>
+                                    <h2 className="font-bold text-sm">{attribute.name}</h2>
+                                    <p className="text-xs">{attribute.description}</p>
                                 </li>
                             ))}
                         </ul>
@@ -125,4 +119,4 @@ class IngredientPicker extends React.Component<IngredientPickerProps> {
     }
 }
 
-export default IngredientPicker
+export default IngredientAttributePicker
