@@ -33,16 +33,11 @@ export default function Page({ params }: { params: { uuid: string } }) {
             </section>
 
             <h1 className={`text-center ${abril.className} text-3xl`}>{cocktail.name}</h1>
-            {cocktail.ingredients.length > 0 && (
-                <>
-                    <h2 className="text-lg font-bold">Ingredients:</h2>
-                    <ul className="flex flex-col gap-2">
-                        {cocktail.ingredients.map((ingredient) => (
-                            <IngredientTag key={ingredient.id} {...ingredient} />
-                        ))}
-                    </ul>
-                </>
-            )}
+            <ul className="flex gap-1">
+                {cocktail.ingredients.map((ingredient) => (
+                    <IngredientTag key={ingredient.id} {...ingredient} />
+                ))}
+            </ul>
             {cocktail.instructions && (
                 <>
                     <h2 className="text-lg font-bold">Instructions:</h2>

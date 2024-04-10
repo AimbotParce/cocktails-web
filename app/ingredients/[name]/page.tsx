@@ -33,9 +33,11 @@ export default function Page({ params }: { params: { name: string } }) {
                 <DeleteButton href={`/ingredients/${params.name}?edit`} />
             </section>
             <h1 className={`text-center ${abril.className} text-3xl`}>{ingredient.name}</h1>
-            {ingredient.attributes.map((attr) => (
-                <IngredientAttributeTag key={attr.id} {...attr} />
-            ))}
+            <ul className="flex gap-1">
+                {ingredient.attributes.map((attr) => (
+                    <IngredientAttributeTag key={attr.id} {...attr} />
+                ))}
+            </ul>
             {ingredient.description && <p>{ingredient.description}</p>}
         </main>
     )
