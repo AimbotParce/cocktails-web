@@ -26,12 +26,12 @@ export default function Page({ params }: { params: { name: string } }) {
     if (!attribute) return <h1>Loading...</h1>
 
     return (
-        <main className="flex flex-col gap-4 bg-white p-4 relative">
+        <main className="flex flex-col gap-2 bg-white p-4 relative">
             <section className="flex gap-2 absolute top-4 right-4">
                 <EditButton href={`/ingredient_attributes/${params.name}?edit`} />
                 <DeleteButton href={`/ingredient_attributes/${params.name}?edit`} />
             </section>
-            <h1 className={`text-center ${abril.className} text-3xl`}>{attribute.name}</h1>
+            <h1 className={`text-center ${abril.className} text-3xl pb-2`}>{attribute.name}</h1>
             {attribute.description && <p>{attribute.description}</p>}
         </main>
     )

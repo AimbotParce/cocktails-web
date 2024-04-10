@@ -5,6 +5,7 @@ import DeleteButton from "@/components/buttons/DeleteButton"
 import EditButton from "@/components/buttons/EditButton"
 import IngredientTag from "@/components/IngredientTag"
 import { Abril_Fatface } from "next/font/google"
+import Image from "next/image"
 import { notFound } from "next/navigation"
 import { useEffect, useState } from "react"
 
@@ -26,13 +27,22 @@ export default function Page({ params }: { params: { uuid: string } }) {
     if (!cocktail) return <h1>Loading...</h1>
 
     return (
-        <main className="flex flex-col gap-4 bg-white p-4 relative">
+        <main className="flex flex-col gap-2 bg-white p-4 relative">
             <section className="flex gap-2 absolute top-4 right-4">
                 <EditButton href={`/cocktails/${params.uuid}?edit`} />
                 <DeleteButton href={`/cocktails/${params.uuid}?edit`} />
             </section>
 
-            <h1 className={`text-center ${abril.className} text-3xl`}>{cocktail.name}</h1>
+            <h1 className={`text-center ${abril.className} text-3xl pb-2`}>{cocktail.name}</h1>
+            <div className="relative w-full h-96">
+                <Image
+                    src={`${process.env.NEXT_PUBLIC_API_URL}/attachments/images/${cocktail.image.uuid}`}
+                    unoptimized={true}
+                    alt={cocktail.image.name}
+                    layout="fill"
+                    objectFit="cover"
+                />
+            </div>
             <ul className="flex gap-1">
                 {cocktail.ingredients.map((ingredient) => (
                     <IngredientTag key={ingredient.id} {...ingredient} />
