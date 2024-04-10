@@ -31,7 +31,7 @@ export default function Page({ params }: { params: { name: string } }) {
                 <EditButton href={`/ingredient_attributes/${params.name}?edit`} />
                 <DeleteButton href={`/ingredient_attributes/${params.name}?edit`} />
             </section>
-            <h1 className={`text-center ${abril.className} text-3xl pb-2`}>{attribute.name}</h1>
+            <h1 className={`text-center ${abril.className} text-3xl py-1`}>{attribute.name}</h1>
             {attribute.description && <p>{attribute.description}</p>}
         </main>
     )

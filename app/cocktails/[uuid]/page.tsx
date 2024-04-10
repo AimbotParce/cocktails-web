@@ -33,7 +33,7 @@ export default function Page({ params }: { params: { uuid: string } }) {
                 <DeleteButton href={`/cocktails/${params.uuid}?edit`} />
             </section>
 
-            <h1 className={`text-center ${abril.className} text-3xl pb-2`}>{cocktail.name}</h1>
+            <h1 className={`text-center ${abril.className} text-3xl py-1`}>{cocktail.name}</h1>
             <div className="relative w-full h-96">
                 <Image
                     src={`${process.env.NEXT_PUBLIC_API_URL}/attachments/images/${cocktail.image.uuid}`}
