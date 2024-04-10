@@ -3,7 +3,7 @@ import get_cocktails from "@/api/cocktails/get"
 import Cocktail from "@/api/models/cocktail"
 import CocktailCard from "@/components/CocktailCard"
 import AddButton from "@/components/buttons/AddButton"
-import { Search } from "@mui/icons-material"
+import SearchButton from "@/components/buttons/SearchButton"
 import { useEffect, useState } from "react"
 
 export default function Home() {
@@ -17,9 +17,7 @@ export default function Home() {
         <main className="flex flex-col gap-4">
             <section className="w-full flex gap-2">
                 <input type="text" className="w-full p-2" placeholder="Search for a cocktail" />
-                <button className="bg-white p-2">
-                    <Search />
-                </button>
+                <SearchButton />
                 <AddButton href="/cocktails/new" />
             </section>
             <ol className="flex flex-col gap-4">

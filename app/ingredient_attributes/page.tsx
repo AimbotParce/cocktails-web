@@ -2,7 +2,7 @@
 import get_ingredient_attributes from "@/api/ingredient_attributes/get"
 import IngredientAttribute from "@/api/models/ingredient_attribute"
 import AddButton from "@/components/buttons/AddButton"
-import { Search } from "@mui/icons-material"
+import SearchButton from "@/components/buttons/SearchButton"
 import { useEffect, useState } from "react"
 
 export default function Home() {
@@ -16,9 +16,7 @@ export default function Home() {
         <main className="flex flex-col gap-4">
             <section className="w-full flex gap-2">
                 <input type="text" className="w-full p-2" placeholder="Search for an attribute" />
-                <button className="bg-white p-2">
-                    <Search />
-                </button>
+                <SearchButton />
                 <AddButton href="/ingredient_attributes/new" />
             </section>
             <ol className="flex flex-col gap-2">
