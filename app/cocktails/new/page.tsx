@@ -3,7 +3,7 @@ import post_image from "@/api/attachments/images/post"
 import post_cocktail from "@/api/cocktails/post"
 import Cocktail from "@/api/models/cocktail"
 import IngredientPicker from "@/components/IngredientPicker"
-import { Done } from "@mui/icons-material"
+import DoneButton from "@/components/buttons/DoneButton"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 
@@ -43,7 +43,7 @@ export default function Page() {
                 <label>Image:</label>
                 <input type="file" accept="image/*" className="bg-white px-3 py-2" onChange={handleImageUpload} />
             </form>
-            <button
+            <DoneButton
                 className="bg-[var(--turquoise)] text-white p-2"
                 onClick={async () => {
                     if (image) {
@@ -51,9 +51,7 @@ export default function Page() {
                     }
                     post_cocktail(cocktail).then((c) => router.push(`/cocktails/${c.uuid}`))
                 }}
-            >
-                <Done />
-            </button>
+            />
         </main>
     )
 }

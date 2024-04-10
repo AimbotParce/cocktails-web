@@ -2,7 +2,8 @@
 import get_cocktails from "@/api/cocktails/get"
 import Cocktail from "@/api/models/cocktail"
 import CocktailCard from "@/components/CocktailCard"
-import { Add, Search } from "@mui/icons-material"
+import AddButton from "@/components/buttons/AddButton"
+import { Search } from "@mui/icons-material"
 import { useEffect, useState } from "react"
 
 export default function Home() {
@@ -19,9 +20,7 @@ export default function Home() {
                 <button className="bg-white p-2">
                     <Search />
                 </button>
-                <a className="bg-[var(--turquoise)] text-white p-2" href="/cocktails/new">
-                    <Add />
-                </a>
+                <AddButton href="/ingredients/new" />
             </section>
             <ol className="flex flex-col gap-4">
                 {cocktails.map((cocktail) => (

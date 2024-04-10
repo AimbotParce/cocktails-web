@@ -1,7 +1,7 @@
 "use client"
 import post_ingredient_attribute from "@/api/ingredient_attributes/post"
 import IngredientAttribute from "@/api/models/ingredient_attribute"
-import { Done } from "@mui/icons-material"
+import DoneButton from "@/components/buttons/DoneButton"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 
@@ -25,14 +25,12 @@ export default function Page() {
                     onChange={(e) => setAttribute({ ...attribute, description: e.target.value })}
                 />
             </form>
-            <button
+            <DoneButton
                 className="bg-[var(--turquoise)] text-white p-2"
                 onClick={() => {
                     post_ingredient_attribute(attribute).then((a) => router.push(`/ingredient_attributes/${a.name}`))
                 }}
-            >
-                <Done />
-            </button>
+            />
         </main>
     )
 }

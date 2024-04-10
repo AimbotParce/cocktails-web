@@ -1,7 +1,8 @@
 "use client"
 import get_ingredient_attributes from "@/api/ingredient_attributes/get"
 import IngredientAttribute from "@/api/models/ingredient_attribute"
-import { Add, Search } from "@mui/icons-material"
+import AddButton from "@/components/buttons/AddButton"
+import { Search } from "@mui/icons-material"
 import { useEffect, useState } from "react"
 
 export default function Home() {
@@ -18,9 +19,7 @@ export default function Home() {
                 <button className="bg-white p-2">
                     <Search />
                 </button>
-                <a className="bg-[var(--turquoise)] text-white p-2" href="/ingredient_attributes/new">
-                    <Add />
-                </a>
+                <AddButton href="/ingredients/new" />
             </section>
             <ol className="flex flex-col gap-2">
                 {attributes.map((attribute, j) => (

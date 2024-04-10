@@ -1,7 +1,8 @@
 "use client"
 import get_ingredient_attribute from "@/api/ingredient_attributes/name/get"
 import IngredientAttribute from "@/api/models/ingredient_attribute"
-import { Edit } from "@mui/icons-material"
+import DeleteButton from "@/components/buttons/DeleteButton"
+import EditButton from "@/components/buttons/EditButton"
 import { Abril_Fatface } from "next/font/google"
 import { notFound, useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
@@ -26,14 +27,10 @@ export default function Page({ params }: { params: { name: string } }) {
 
     return (
         <main className="flex flex-col gap-4 bg-white p-4 relative">
-            <button
-                className="border p-2 w-fit absolute top-4 right-4"
-                onClick={() => {
-                    router.push(`/ingredient_attributes/${params.name}?edit`)
-                }}
-            >
-                <Edit />
-            </button>
+            <section className="flex gap-2 absolute top-4 right-4">
+                <EditButton href={`/ingredient_attributes/${params.name}?edit`} />
+                <DeleteButton href={`/ingredient_attributes/${params.name}?edit`} />
+            </section>
             <h1 className={`text-center ${abril.className} text-3xl`}>{attribute.name}</h1>
             {attribute.description && <p>{attribute.description}</p>}
         </main>
