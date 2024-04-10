@@ -20,7 +20,7 @@ export default function Home() {
                 <button className="bg-white p-2">
                     <Search />
                 </button>
-                <AddButton href="/ingredients/new" />
+                <AddButton href="/cocktails/new" />
             </section>
             <ol className="flex flex-col gap-4">
                 {cocktails.map((cocktail) => (

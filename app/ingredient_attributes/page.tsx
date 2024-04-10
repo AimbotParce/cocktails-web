@@ -19,7 +19,7 @@ export default function Home() {
                 <button className="bg-white p-2">
                     <Search />
                 </button>
-                <AddButton href="/ingredients/new" />
+                <AddButton href="/ingredient_attributes/new" />
             </section>
             <ol className="flex flex-col gap-2">
                 {attributes.map((attribute, j) => (
