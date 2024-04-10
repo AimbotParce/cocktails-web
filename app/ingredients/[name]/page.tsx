@@ -1,4 +1,5 @@
 "use client"
+import delete_ingredient from "@/api/ingredients/name/delete"
 import get_ingredient from "@/api/ingredients/name/get"
 import Ingredient from "@/api/models/ingredient"
 import IngredientAttributeTag from "@/components/IngredientAttributeTag"
@@ -31,7 +32,13 @@ export default function Page({ params }: { params: { name: string } }) {
         <main className="flex flex-col gap-2 bg-white p-4 relative">
             <section className="flex gap-2 absolute top-4 right-4">
                 <EditButton href={`/ingredients/${params.name}?edit`} />
-                <DeleteButton href={`/ingredients/${params.name}?edit`} />
+                <DeleteButton
+                    onClick={() => {
+                        delete_ingredient(params.name).then(() => {
+                            router.push("/ingredients")
+                        })
+                    }}
+                />
             </section>
             <h1 className={`text-center ${abril.className} text-3xl py-1`}>{ingredient.name}</h1>
             <div className="relative w-full h-96">

@@ -1,4 +1,5 @@
 "use client"
+import delete_cocktail from "@/api/cocktails/uuid/delete"
 import get_cocktail from "@/api/cocktails/uuid/get"
 import Cocktail from "@/api/models/cocktail"
 import DeleteButton from "@/components/buttons/DeleteButton"
@@ -6,13 +7,14 @@ import EditButton from "@/components/buttons/EditButton"
 import IngredientTag from "@/components/IngredientTag"
 import { Abril_Fatface } from "next/font/google"
 import Image from "next/image"
-import { notFound } from "next/navigation"
+import { notFound, useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 
 const abril = Abril_Fatface({ weight: "400", subsets: ["latin"] })
 
 export default function Page({ params }: { params: { uuid: string } }) {
     const [cocktail, setCocktail] = useState<Cocktail | null>()
+    const router = useRouter()
 
     useEffect(() => {
         get_cocktail(params.uuid)
@@ -30,7 +32,13 @@ export default function Page({ params }: { params: { uuid: string } }) {
         <main className="flex flex-col gap-2 bg-white p-4 relative">
             <section className="flex gap-2 absolute top-4 right-4">
                 <EditButton href={`/cocktails/${params.uuid}?edit`} />
-                <DeleteButton href={`/cocktails/${params.uuid}?edit`} />
+                <DeleteButton
+                    onClick={() => {
+                        delete_cocktail(params.uuid).then(() => {
+                            router.push("/")
+                        })
+                    }}
+                />
             </section>
 
             <h1 className={`text-center ${abril.className} text-3xl py-1`}>{cocktail.name}</h1>
