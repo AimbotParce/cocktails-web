@@ -15,7 +15,7 @@ export default function Home() {
     return (
         <main className="flex flex-col gap-4">
             <section className="w-full flex gap-2">
-                <input type="text" className="w-full p-2" placeholder="Search for an ingredient" />
+                <input type="text" className="w-full p-2 border" placeholder="Search for an ingredient" />
                 <SearchButton />
                 <AddButton href="/ingredients/new" />
             </section>
