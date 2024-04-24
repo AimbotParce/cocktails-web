@@ -61,7 +61,7 @@ async function authenticate(username: string, password: string) {
     })
 }
 
-export default NextAuth({
+const handler = NextAuth({
     secret: process.env.TOKEN_SECRET,
 
     jwt: {
@@ -139,3 +139,5 @@ export default NextAuth({
         }),
     ],
 })
+
+export { handler as GET, handler as POST }
