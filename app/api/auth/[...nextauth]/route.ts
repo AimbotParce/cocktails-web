@@ -9,6 +9,12 @@ async function authenticate(username: string, password: string) {
         url: process.env.LDAP_HOST as string,
     })
 
+    const opts: ldap.SearchOptions = {
+        filter: `(uid=${username})`,
+        scope: "sub",
+        attributes: ["dn", "cn"],
+    }
+
     const entries: ldap.SearchEntry[] = []
 
     return new Promise((resolve, reject) => {
@@ -16,12 +22,6 @@ async function authenticate(username: string, password: string) {
             if (error) {
                 reject("LDAP bound failed")
             } else {
-                const opts: ldap.SearchOptions = {
-                    filter: `(&(sAMAccountName=${username}))`,
-                    scope: "sub",
-                    attributes: ["dn", "sn", "cn", "sAMAccountName"],
-                }
-
                 client.search(process.env.LDAP_BASE_DN as string, opts, (err, res) => {
                     if (err) {
                         reject(`User ${username} LDAP search error`)
@@ -32,14 +32,11 @@ async function authenticate(username: string, password: string) {
                         res.on("searchEntry", (entry) => {
                             entries.push(entry)
 
-                            client.bind(entry.dn, password, (err, res) => {
+                            client.bind(entry.pojo.objectName, password, (err, res) => {
                                 if (err) {
                                     reject(`User ${username} username or password problem`)
                                 } else {
-                                    resolve({
-                                        username,
-                                        password,
-                                    })
+                                    resolve({ username, password })
                                 }
                             })
                         })
@@ -47,7 +44,7 @@ async function authenticate(username: string, password: string) {
                             //console.log('referral: ' + referral.uris.join());
                         })
                         res.on("error", (err) => {
-                            reject("LDAP SEARCH error")
+                            reject(`LDAP SEARCH error: ${err}`)
                         })
                         res.on("end", (result) => {
                             if (entries.length == 0) {
