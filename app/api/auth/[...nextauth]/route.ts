@@ -63,11 +63,11 @@ const handler = NextAuth({
 
     jwt: {
         secret: process.env.TOKEN_SECRET,
-        encode: async (data: any) => {
+        encode: async (data) => {
             const { secret, token, maxAge } = data
             const jwtClaims = {
-                username: token.username,
-                rights: token.rights,
+                username: token?.username,
+                password: token?.password,
             }
 
             const encodedToken = jwt.sign(jwtClaims, secret, {
@@ -89,11 +89,12 @@ const handler = NextAuth({
     },
     callbacks: {
         async jwt({ token, user }) {
-            if (user?.name) {
+            if (user?.name && user?.password) {
                 token.username = user.name
+                token.password = user.password
             }
 
-            let expSeconds = token.exp as number
+            // let expSeconds = token.exp as number
 
             return token
         },
@@ -126,7 +127,7 @@ const handler = NextAuth({
                     await authenticate(username, password)
 
                     return new Promise((resolve, reject) => {
-                        resolve({ id: username, name: username })
+                        resolve({ id: username, name: username, password: password })
                     })
                 } catch (error) {
                     console.log(error)
